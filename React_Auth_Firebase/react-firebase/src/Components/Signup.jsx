@@ -1,12 +1,26 @@
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import {firebaseAuth}  from "../firebase.config";
+
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSignIn = async () => { };
-    
+  const handleSignIn = async () => { 
+    try {
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) {
+      navigate("/")
+    }
+  })
   return (
     <Section>
       <div className="container">

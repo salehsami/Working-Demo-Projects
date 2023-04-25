@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth"
-import {initizeApp} from "firebase/app"
+import {initializeApp} from "firebase/app"
 
 const firebaseConfig = {
     apiKey: "AIzaSyD0ArkQVZxTLk4ucHm_4vBbU4iaIY4IEck",
@@ -11,6 +11,6 @@ const firebaseConfig = {
     measurementId: "G-X0VV3WMHYQ"
 };
   
-const app = initizeApp(firebaseConfig) // added complete configuration with app
+const app = initializeApp(firebaseConfig); // added complete configuration with app
 
-export default firebaseAuth = getAuth(app) // main auth functonality includeing complete firebase setup of web app
+export const firebaseAuth = getAuth(app); // main auth functonality includeing complete firebase setup of web app

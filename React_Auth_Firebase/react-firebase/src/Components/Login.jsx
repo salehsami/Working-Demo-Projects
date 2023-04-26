@@ -1,13 +1,25 @@
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { firebaseAuth } from "../firebase-config";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleLogIn = async () => { };
-    
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
+    } catch (error) {
+      console.log(error.code);
+    }
+  };
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) navigate("/");
+  });
+
   return (
     <Section>
       <div className="container">
@@ -25,9 +37,9 @@ export default function Login() {
           placeholder="Password"
         />
         <div className="button">
-          <button onClick={handleLogIn}>Login</button>
+          <button onClick={handleLogin}>Login</button>
           <span>
-            Don't have an account? <Link to="/Signup">SignUp</Link>
+            Not a member ? <Link to="/signup">Sign up</Link>
           </span>
         </div>
       </div>
@@ -56,6 +68,8 @@ const Section = styled.section`
     align-items: center;
     flex-direction: column;
     gap: 1rem;
+    .inputs {
+    }
     input {
       background-color: #5c5f63a3;
       border: none;

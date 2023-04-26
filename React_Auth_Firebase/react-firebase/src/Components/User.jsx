@@ -1,15 +1,26 @@
-import React from 'react'
-import styled  from "styled-components";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useState } from "react";
+import { firebaseAuth } from "../firebase-config";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function User() {
+  const [user, setUser] = useState(undefined);
+  const navigate = useNavigate();
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) setUser(currentUser);
+    else navigate("/login");
+  });
+
   return (
     <Section>
       <div className="container">
-        <h2>Welcome</h2>
-        <button>Sign Out</button>
+        <h1>Welcome {user?.email}</h1>
+        <button onClick={() => signOut(firebaseAuth)}>Sign Out</button>
       </div>
     </Section>
-  )
+  );
 }
 
 const Section = styled.section`

@@ -1,4 +1,5 @@
 const express = require('express')
+const { getGoal, updateGoal, setGoal, deleteGoal } = require('../controller/goalController')
 const router = express.Router()
 
 // app.get('/api/goals', (req, res) => {
@@ -7,20 +8,25 @@ const router = express.Router()
 //  now if we wanna try it in json format
 
 // changes '/api/routes/ to '/' cuz when it come from  server.js to here it will be the home or main
-router.get('/', (req, res) => {
-    res.status(200).json({"messgae": "get or Read goal"})
-}) // still working boy
+// router.get('/', (req, res) => {
+//     res.status(200).json({"messgae": "get or Read goal"})
+// }) // still working boy
 
-router.post('/', (req, res) => {
-    res.status(200).json({"messgae": "set or Create goal"})
-}) 
+// now we are just calling  things from other files like controller and thaey have main functionality implemented in them
+// router.get('/', getGoal)
 
-router.put('/:id', (req, res) => { // update specifc
-    res.status(200).json({"messgae": `Update goal for ${req.params.id}`})
-}) 
+// // similarly with all routes shifting to controller
 
-router.delete('/:id', (req, res) => { //delete from specific id
-    res.status(200).json({"messgae": `Delete goal from ${req.params.id}`})
-}) 
+// router.post('/', setGoal)
+
+// router.put('/:id', updateGoal)
+
+// router.delete('/:id', deleteGoal)
+
+// // now we can do a little minimization of code by due to similarization of the routes
+
+router.route('/').get(getGoal).post(setGoal)
+
+router.route('/:id').put(updateGoal).delete(deleteGoal)
 
 module.exports = router

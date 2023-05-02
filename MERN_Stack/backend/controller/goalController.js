@@ -1,12 +1,13 @@
 const asyncHandler = require('express-async-handler')// package error handler replacement of try catch
 const { Mongoose } = require('mongoose')
+const Goal = require('../model/goalModel')
 
 // description = get goals
 // route = Get /
 // access private
 const getGoal = asyncHandler(async (req, res) => {
-        // const goal = await Goal.find()
-    res.status(200).json({messgae: "get or Read goal"})
+    const goal = await Goal.find()
+    res.status(200).json(goal)
 })
 
 const setGoal = asyncHandler(async (req, res) => {

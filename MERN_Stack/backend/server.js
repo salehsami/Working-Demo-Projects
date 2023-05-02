@@ -1,12 +1,17 @@
 // console.log("complete part 1 before Zoahr prayer on 1-5-2023");
-
 const express = require("express")
-const dotenv = require("dotenv")
+const colors = require('colors')
+// const dotenv = require("dotenv"); // not getting read 
 const { errorHandler } = require("./Middleware/errorMiddleware")
+const connectDB = require("./config/db")
+require('dotenv').config({ path: './.env'})
+
+
 // const port = 5000   we are adding this in environment variable of root
 const port = process.env.Port || 5000 
 const app = express()
 
+console.log(connectDB());
 // to get api's functional and working like getting post data from postman etc
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

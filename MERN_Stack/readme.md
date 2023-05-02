@@ -9,6 +9,7 @@ mongoose
 colors
 dotenv
 -D nodemon
+mongodb
 
 Add .gitignore files and add
 node_modules

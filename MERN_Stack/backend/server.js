@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 app.use('/api/goals', require('./routes/goalRoute')) // go to this whenever user wennt to /api/goals/ and follow routes there
-
+app.use('/api/users', require('./routes/userRoute'))
 app.use(errorHandler) // our own created error handler for specific requirements of err in json and clearly defined
 
 

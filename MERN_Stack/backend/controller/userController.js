@@ -1,30 +1,92 @@
 const asyncHandler = require("express-async-handler")
-const Mongoose = require("mongoose")
+const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+// const Mongoose = require("mongoose")
 const User = require("../model/userModel")
 
-// description = register user
-// route = post api/users
-// access public
-const registerUser = (req, res) => {
-    // const user = User.find()
-    res.status(200).json("user is Registering")
-}
+// @description = register user
+// @route = post api/users
+// @access public
+const registerUser = asyncHandler(async (req, res) => {
+    const { name, email, password, skills } = req.body
+  
+    if (!name || !email || !password|| !skills) {
+      res.status(400)
+      throw new Error('Please add all fields')
+    }
+
+    const userExists = await User.findOne({ email })
+ 
+    if (userExists) {
+        res.status(400)
+        throw new Error("User Exists already")
+    }
+
+    // hashing the  password so even couldn't be seen in mongo database
+    const salt = await bcrypt.genSalt(10)
+    
+    const hashedPassword = await bcrypt.hash(password, salt)
+    
+    //user creation
+    const user = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+        skills
+    })
+
+    // if user exists show this on screen
+    if (user) {
+        res.status(201).json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            skills: user.skills,
+            password: user.password,
+        })
+    }
+
+    else {
+        res.status(400)
+        throw new Error("Invalid User Data")
+    }
+})
 
 // description = Authenticate user
 // route = post api/users/login
 // access private
-const loginUser = (req, res) => {
-    // const user = User.find()
-    res.status(200).json("user is Authenticating")
-}
+const loginUser = asyncHandler(async (req, res) => {
+    
+    // get email and password from body
+    const { email, password } = req.body
+    
+
+    // find by email
+    const user = await User.findOne({ email })
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+        res.json({
+            _id: user.id,
+            name: user.name,
+            // password:hashedPassword,
+            email: user.email,
+            skills: user.skills,
+            password: password,
+            // pin: hashedPassword
+        })
+    }
+    else {
+        res.status(400)
+        throw new Error("User don't exists")
+    }
+})
 
 // description = get user data
 // route = get api/users/me
 // access private
-const getMe = (req, res) => {
+const getMe = asyncHandler(async(req, res) => {
     // const user = User.find()
     res.status(200).json("user data is getting")
-}
+})
 
-
-module.exports = {registerUser, loginUser, getMe}
+module.exports = { registerUser, loginUser, getMe }

@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     },
     skills: {
         type: String,
-        required: [true, "Kindly add your skills"]
+        required:[true,"Please add skills here"]
     }   
 },
     {

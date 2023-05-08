@@ -89,7 +89,15 @@ const loginUser = asyncHandler(async (req, res) => {
 // access private
 const getMe = asyncHandler(async(req, res) => {
     // const user = User.find()
-    res.status(200).json("user data is getting")
+    // res.status(200).json("user data is getting") // now we will use real data istead this
+    const { _id, name, email, skills, password } = await User.findById(req.user.id)
+    res.status(200).json({
+        id: _id,
+        name,
+        email,
+        skills,
+        password // can also give this but i think we have neglected the password but meh! whatever
+    })
 })
 
 //jwt token generation

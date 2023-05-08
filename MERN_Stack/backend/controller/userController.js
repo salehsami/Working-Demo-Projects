@@ -43,6 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
             email: user.email,
             skills: user.skills,
             password: user.password,
+            token: generateToken(user._id)
         })
     }
 
@@ -71,7 +72,9 @@ const loginUser = asyncHandler(async (req, res) => {
             // password:hashedPassword,
             email: user.email,
             skills: user.skills,
-            password: password,
+            password: user.password,
+            token: generateToken(user._id)
+
             // pin: hashedPassword
         })
     }
@@ -88,5 +91,12 @@ const getMe = asyncHandler(async(req, res) => {
     // const user = User.find()
     res.status(200).json("user data is getting")
 })
+
+//jwt token generation
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_Secret, {
+        expiresIn: '30d'
+    })
+}
 
 module.exports = { registerUser, loginUser, getMe }

@@ -1,7 +1,7 @@
 import {useState, useEffect } from "react"
 import { FaSignInAlt } from "react-icons/fa"
 
-function Login() {
+function AdminLogin() {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -21,7 +21,7 @@ function Login() {
   return (
     <>
       <section className="heading">
-        <h1><FaSignInAlt />Login</h1>
+        <h1>Admin Portal</h1>
         <p>Login to your Account</p>
       </section>
       <section className="form">
@@ -50,7 +50,7 @@ function Login() {
           </div>
 
           <div className="form-group">
-            <button type = "submit" className="btn btn-block">Submit</button>
+            <button type = "submit" className="btn btn-block">Login</button>
           </div>
         </form>
       </section>
@@ -59,4 +59,4 @@ function Login() {
   )
 }
 
-export default Login
+export default AdminLogin

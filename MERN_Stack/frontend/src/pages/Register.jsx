@@ -10,13 +10,15 @@ function Register() {
   })
   const { name, email, password, password2 } = formData
 
-  const onChange = () => {}
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState, [e.target.name] : e.target.value
+    }))
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
   }
-
-
 
   return (
     <>
@@ -33,7 +35,7 @@ function Register() {
                 id="name"
                 name="name"
                 value={name}
-                placeholder="Enter Your good name"
+                placeholder="Enter your Good Name"
                 onChange={onChange}/>
           </div>
           
@@ -44,7 +46,7 @@ function Register() {
                 id="email"
                 name="email"
                 value={email}
-                placeholder="Enter Your Email"
+                placeholder="Enter Email"
                 onChange={onChange}/>
           </div>
           

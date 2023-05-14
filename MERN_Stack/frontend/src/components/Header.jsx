@@ -5,17 +5,17 @@ function Header() {
   return (
       <header className="header">
           <div className="logo">
-              <Link to= '/'>Goal Setter</Link>
+              <Link to= '/'>Smart Dial</Link>
           </div>
           <ul>
               <li>
-                  <Link to= "/login" ><FaSignInAlt/>Login</Link>
+                  <Link to= "/emplogin" ><FaUser/>Employee</Link>
               </li>
               <li>
-                  <Link to="/register"><FaUser />Register</Link>
+                  <Link to="/admlogin"><FaUser />Admin</Link>
               </li>
           </ul>
     </header>
   )
 }
-export default Header
+export default Header   

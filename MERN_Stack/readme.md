@@ -29,9 +29,20 @@ npx create-react-app frontend --template redux
 or
 npx create-react-app@latest frontend --template redux
 
-after it
- cd frontend
- npm start
+after it    
+cd frontend
+npm start
 
 npm i react-icons
 npm i react-router-dom
+
+
+now
+we want to run our project with a single command both frontend and backend
+so we do
+in root 
+npm i -D concurrently
+and add it in pacjage.json
+"dev":"concurrently \"npm run server\" \"npm run client\""
+now we can run using a single command 
+npm run dev

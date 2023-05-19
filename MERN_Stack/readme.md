@@ -46,3 +46,6 @@ and add it in pacjage.json
 "dev":"concurrently \"npm run server\" \"npm run client\""
 now we can run using a single command 
 npm run dev
+
+in frontend also add
+npm i axios react-toastify

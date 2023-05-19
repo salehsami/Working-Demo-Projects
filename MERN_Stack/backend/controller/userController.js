@@ -7,9 +7,9 @@ const User = require("../model/userModel")
 // @route = post api/users
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, skills } = req.body
+    const { name, email, password } = req.body
   
-    if (!name || !email || !password|| !skills) {
+    if (!name || !email || !password) {
       res.status(400)
       throw new Error('Please add all fields')
     }
@@ -31,7 +31,6 @@ const registerUser = asyncHandler(async (req, res) => {
         name,
         email,
         password: hashedPassword,
-        skills
     })
 
     // if user exists show this on screen
@@ -40,7 +39,6 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            skills: user.skills,
             password: user.password,
             token: generateToken(user._id)
         })
@@ -70,7 +68,6 @@ const loginUser = asyncHandler(async (req, res) => {
             name: user.name,
             // password:hashedPassword,
             email: user.email,
-            skills: user.skills,
             password: user.password,
             token: generateToken(user._id)
 
@@ -89,12 +86,11 @@ const loginUser = asyncHandler(async (req, res) => {
 const getMe = asyncHandler(async(req, res) => {
     // const user = User.find()
     // res.status(200).json("user data is getting") // now we will use real data istead this
-    const { _id, name, email, skills, password } = await User.findById(req.user.id)
+    const { _id, name, email, password } = await User.findById(req.user.id)
     res.status(200).json({
         id: _id,
         name,
         email,
-        skills,
         password // can also give this but i think we have neglected the password but meh! whatever
     })
 })

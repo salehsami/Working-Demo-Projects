@@ -14,10 +14,6 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "Please add password"]
     },
-    skills: {
-        type: String,
-        required:[true,"Please add skills here"]
-    }   
 },
     {
         timstamps:true // will add creation and updation time automatically

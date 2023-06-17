@@ -1,0 +1,12 @@
+{
+    "manifest_version":3,
+    "version":"2.7",
+    "name":"Rainbow Text",
+    "content_script":[
+        {
+            "matches":["<all_urls>"],
+            "js":["index.js"],
+            "css":["style.css"]
+        }
+    ]
+}

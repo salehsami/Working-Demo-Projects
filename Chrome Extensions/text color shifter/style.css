@@ -1,0 +1,49 @@
+.rainbow{
+    animation: rainbow 600ms;
+    animation-iteration-count: infinite;
+}
+@keyframes rainbow{
+    0%{
+        color:red;
+    }
+    10%{
+        color: yellow;
+    }
+    20%{
+        color: blue;
+    }
+    30%{
+        color: green;
+
+    }
+    40%{
+        color: indigo;
+
+
+    }
+    50%{
+        color: violet;
+
+    }
+    60%{
+        color: blue;
+
+    }
+    70%{
+        color: blue;
+
+    }
+    80%{
+        color: blue;
+
+    }
+    90%{
+        color: blue;
+
+    }
+    100%{
+        color: blue;
+
+    }
+
+}
